@@ -1,0 +1,12 @@
+
+crewai>=0.76.0
+langgraph>=0.2.30
+langchain-openai>=0.2.0
+langsmith>=0.1.100
+pydantic>=2.9.0
+supabase>=2.9.0
+trulens>=1.0.0
+streamlit>=1.38.0
+pytest>=8.3.0
+python-dotenv>=1.0.0
+
