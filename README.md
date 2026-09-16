@@ -26,6 +26,7 @@ Dieses Projekt demonstriert **AI Engineering Practices**: State-Management mit L
 - **UI:** [Streamlit](https://streamlit.io/)
 
 ---
+
 ### System Architektur
 
 subgraph "Orchestration Layer"
@@ -123,6 +124,7 @@ sequenceDiagram
         LG-->>U: ⛔ Blocked (Low Quality)
     end
 
+```
 
 ---
 ## 🤖 Die 4 AI Agenten
