@@ -26,103 +26,67 @@ Dieses Projekt demonstriert **AI Engineering Practices**: State-Management mit L
 - **UI:** [Streamlit](https://streamlit.io/)
 
 ---
-
-### System Architektur
-
-subgraph "Orchestration Layer"
-    LG[LangGraph State Machine]
-    LG -->|State Management| LG
-end
-
-subgraph "Multi-Agent System (CrewAI)"
-    direction TB
-    A1[Data Analyst Agent]
-    A2[Copywriter Agent]
-    A3[QA Reviewer Agent]
-    A4[Email Dispatcher Agent]
-    
-    A1 -->|Kundendaten| A2
-    A2 -->|E-Mail Entwurf| A3
-    A3 -->|Optimierter Text| A4
-end
-
-subgraph "Tools & Integrations"
-    T1[Supabase Tool]
-    T2[SMTP Email Tool]
-end
-
-subgraph "Data Layer"
-    DB[(Supabase PostgreSQL)]
-    SMTP[SMTP Server]
-end
-
-subgraph "AI Infrastructure"
-    OLLAMA[Ollama + Llama 3.2]
-    EVAL[LLM-as-Judge Evaluation]
-end
-
-CLI --> LG
-UI --> LG
-LG -->|Execute Crew| A1
-
-A1 -->|Fetch Inactive Customers| T1
-T1 -->|Query| DB
-
-A2 -->|Generate Email| OLLAMA
-A3 -->|Review & Optimize| OLLAMA
-A4 -->|Send Email| T2
-T2 -->|SMTP Protocol| SMTP
-
-A4 -->|Email Content| EVAL
-EVAL -->|Score: Relevanz, Kohärenz, Überzeugungskraft| EVAL
-EVAL -->|Quality Gate ≥ 0.3| A4
-
-style LG fill:#e1f5ff
-style OLLAMA fill:#fff4e1
-style EVAL fill:#ffe1e1
-style DB fill:#e1ffe1
-
-
-### Datenfluss
+### System-Architektur
 
 ```mermaid
-sequenceDiagram
-    participant U as User
-    participant LG as LangGraph
-    participant DA as Data Analyst
-    participant SB as Supabase
-    participant CW as Copywriter
-    participant QA as QA Reviewer
-    participant ED as Email Dispatcher
-    participant EV as LLM-as-Judge
-    participant SMTP as SMTP Server
-    
-    U->>LG: Start Campaign
-    LG->>DA: Fetch Inactive Customers
-    DA->>SB: SELECT * FROM customers
-    SB-->>DA: Customer Data
-    DA-->>LG: Customer JSON
-    
-    LG->>CW: Generate Email
-    CW->>CW: Create Personalized Content
-    CW-->>LG: Email Draft
-    
-    LG->>QA: Review & Optimize
-    QA->>QA: Improve Grammar & Persuasion
-    QA-->>LG: Optimized Email
-    
-    LG->>EV: Evaluate Quality
-    EV->>EV: Score: Relevanz, Kohärenz, Überzeugungskraft
-    EV-->>LG: Quality Score
-    
-    alt Score ≥ 0.3
-        LG->>ED: Send Email
-        ED->>SMTP: Send via SMTP
-        SMTP-->>ED: Success
-        ED-->>U: ✅ Email Sent
-    else Score < 0.3
-        LG-->>U: ⛔ Blocked (Low Quality)
+graph TB
+    subgraph "User Interface"
+        CLI[CLI: main.py]
+        UI[Streamlit Dashboard]
     end
+    
+    subgraph "Orchestration Layer"
+        LG[LangGraph State Machine]
+        LG -->|State Management| LG
+    end
+    
+    subgraph "Multi-Agent System (CrewAI)"
+        direction TB
+        A1[Data Analyst Agent]
+        A2[Copywriter Agent]
+        A3[QA Reviewer Agent]
+        A4[Email Dispatcher Agent]
+        
+        A1 -->|Kundendaten| A2
+        A2 -->|E-Mail Entwurf| A3
+        A3 -->|Optimierter Text| A4
+    end
+    
+    subgraph "Tools & Integrations"
+        T1[Supabase Tool]
+        T2[SMTP Email Tool]
+    end
+    
+    subgraph "Data Layer"
+        DB[(Supabase PostgreSQL)]
+        SMTP[SMTP Server]
+    end
+    
+    subgraph "AI Infrastructure"
+        OLLAMA[Ollama + Llama 3.2]
+        EVAL[LLM-as-Judge Evaluation]
+    end
+    
+    CLI --> LG
+    UI --> LG
+    LG -->|Execute Crew| A1
+    
+    A1 -->|Fetch Inactive Customers| T1
+    T1 -->|Query| DB
+    
+    A2 -->|Generate Email| OLLAMA
+    A3 -->|Review & Optimize| OLLAMA
+    A4 -->|Send Email| T2
+    T2 -->|SMTP Protocol| SMTP
+    
+    A4 -->|Email Content| EVAL
+    EVAL -->|Score: Relevanz, Kohärenz, Überzeugungskraft| EVAL
+    EVAL -->|Quality Gate ≥ 0.3| A4
+    
+    style LG fill:#e1f5ff
+    style OLLAMA fill:#fff4e1
+    style EVAL fill:#ffe1e1
+    style DB fill:#e1ffe1
 
 ```
 
