@@ -1,8 +1,8 @@
 
-cat << 'EOF' > README.md
-# 🛒 E-Commerce AI Re-Engagement System
 
-## 📋 Projektübersicht
+# E-Commerce AI Re-Engagement System
+
+## Projektübersicht
 
 Dieses Projekt implementiert ein **produktionsnahes Multi-Agenten-System** zur automatisierten Kundenrückgewinnung im E-Commerce. Es kombiniert moderne AI-Frameworks mit robuster Fehlerbehandlung und Qualitätssicherung durch LLM-basierte Evaluation.
 
@@ -14,7 +14,7 @@ Dieses Projekt demonstriert **AI Engineering Practices**: State-Management mit L
 
 ---
 
-## 🏗 Architektur & Tech Stack
+## Architektur & Tech Stack
 
 - **Orchestrierung:** [LangGraph](https://langchain-ai.github.io/langgraph/) (State-Machine für kontrollierte Workflows)
 - **Multi-Agenten:** [CrewAI](https://www.crewai.com/) (Rollenbasierte Kollaboration von 4 spezialisierten Agenten)
@@ -91,7 +91,7 @@ graph TB
 ```
 
 ---
-## 🤖 Die 4 AI Agenten
+##  Die 4 AI Agenten
 
 ### 1. **E-Commerce Data Analyst**
 - **Rolle:** Datenbank-Experte
@@ -115,7 +115,7 @@ graph TB
 
 ---
 
-## 📊 Evaluation & Qualitätssicherung
+## Evaluation & Qualitätssicherung
 
 Das System implementiert **LLM-as-a-Judge** mit drei Metriken:
 
@@ -127,7 +127,7 @@ Das System implementiert **LLM-as-a-Judge** mit drei Metriken:
 
 ---
 
-## 🚀 Setup & Installation
+##  Setup & Installation
 
 ### 1. Repository klonen
 ```bash
